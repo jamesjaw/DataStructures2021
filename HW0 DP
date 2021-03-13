@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+int main(){
+    int itNum,wlimt;
+    cin>>itNum>>wlimt;
+    int* itary = new int[itNum+1];
+    int* wary = new int[itNum+1];
+    for(int i=1;i<=itNum;i++){
+        cin>>itary[i]>>wary[i];
+    }
+    int dp[105][1005];
+    for(int i=0;i<1005;i++) dp[0][i] = 0;
+    for(int i=0;i<105;i++) dp[i][0] = 0;
+    
+    for(int i=1;i<=itNum;i++){
+        for(int j=1;j<=wlimt;j++){
+            if(j>=wary[i]){
+                dp[i][j] = dp[i-1][j]>dp[i-1][j-wary[i]]+itary[i]?dp[i-1][j]:dp[i-1][j-wary[i]]+itary[i];
+            }
+            else{
+                dp[i][j] = dp[i-1][j];
+            }
+        }
+    }
+    
+    cout<<dp[itNum][wlimt]<<endl;
+    delete [] itary;
+    delete [] wary;
+    return 0;
+}
