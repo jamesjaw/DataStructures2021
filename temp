@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class node{
+public:
+    node(){
+        l = 0;
+        path = "";
+    }
+    int l;
+    string path;
+};
+node map[101][101];
+int map2[101][101];
+int main(){
+    int n;
+    cin>>n;
+    char in;
+    int ii;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin>>ii;
+            if(ii==0 && i!=j){
+                map2[i][j] = 9999;
+            }
+            else{
+                map2[i][j] = ii;
+            }
+        }
+    }
+    
+    
+    
+    for(int k=0;k<n;k++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(map2[i][k]+map2[k][j]<map2[i][j]){
+                    map2[i][j] = map2[i][k] + map2[k][j];
+                }
+            }
+        }
+
+        cout<<k<<"\n";
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                cout<<map2[i][j]<<" ";
+            }
+            cout<<"\n";
+        }
+    }
+    return 0;
+}
